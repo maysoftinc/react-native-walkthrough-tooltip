@@ -6,6 +6,7 @@ import {
   Modal,
   TouchableWithoutFeedback,
   View,
+  Image
 } from 'react-native';
 import rfcIsEqual from 'react-fast-compare';
 import {
@@ -105,6 +106,8 @@ class Tooltip extends Component {
     useReactNativeModal: PropTypes.bool,
     topAdjustment: PropTypes.number,
     accessible: PropTypes.bool,
+    arrowStyle: PropTypes.any,
+    arrowSource: PropTypes.any
   };
 
   constructor(props) {
@@ -395,7 +398,9 @@ class Tooltip extends Component {
         <View style={generatedStyles.containerStyle}>
           <View style={[generatedStyles.backgroundStyle]}>
             <View style={generatedStyles.tooltipStyle}>
-              {hasChildren ? <View style={generatedStyles.arrowStyle} /> : null}
+              {hasChildren && (this.props.placement === "left" || this.props.placement === "bottom") ?
+                <Image source={this.props.arrowSource} style={[this.props.arrowStyle, { zIndex: 100 }]} /> : null
+              }
               <View
                 onLayout={this.measureContent}
                 style={generatedStyles.contentStyle}
@@ -407,6 +412,9 @@ class Tooltip extends Component {
                   {this.props.content}
                 </TouchableWithoutFeedback>
               </View>
+              {hasChildren && this.props.placement === "top" ?
+                <Image source={this.props.arrowSource} style={[this.props.arrowStyle, { zIndex: 100 }]} /> : null
+              }
             </View>
           </View>
           {hasChildren && this.props.showChildInTooltip

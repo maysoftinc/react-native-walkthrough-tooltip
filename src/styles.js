@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   content: {
     borderRadius: 4,
     padding: 8,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(0, 0, 0, 0)',
     overflow: 'hidden',
   },
   arrow: {
